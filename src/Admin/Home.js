@@ -5,9 +5,13 @@ import { Link } from "react-router-dom";
 const Home = () => {
   return (
     <>
+      <br />
       <h1 style={{ textAlign: "center", margin: "30px 0 30px 0" }}>
         Welcome to Musafir Mahal Admin Pannel
       </h1>
+      <br />
+      <hr />
+      <br />
       <div className="container2">
         <Link className="card1 link-style" to="addTrip">
           <h3>Add Trip</h3>

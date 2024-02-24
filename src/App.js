@@ -13,6 +13,16 @@ function App() {
     localStorage.getItem("adtoken") ? true : false
   );
   // setLogin(localStorage.getItem("adtoken") ? true : false);
+  const token = localStorage.getItem("adtoken");
+  if (token) {
+    const tokenData = JSON.parse(atob(token.split(".")[1]));
+    const expirationTime = tokenData.exp * 1000; // Expiration time in milliseconds
+    if (Date.now() > expirationTime) {
+      SignOut({ login, setLogin });
+    }
+  } else {
+    // SignOut({ login, setLogin });
+  }
 
   useEffect(() => {
     const token = localStorage.getItem("adtoken");
@@ -22,6 +32,8 @@ function App() {
       if (Date.now() > expirationTime) {
         SignOut({ login, setLogin });
       }
+    } else {
+      // SignOut({ login, setLogin });
     }
     // setLogin(localStorage.getItem("adtoken") ? true : false);
     // const timeout = setTimeout(() => {
@@ -29,7 +41,7 @@ function App() {
     // }, 2 * 60 * 1000); // 2 minutes
     // return () => clearTimeout(timeout);
     // // console.log("logged in  ", login, localStorage.getItem("adtoken"));
-  }, []);
+  }, [login]);
 
   return (
     <>
