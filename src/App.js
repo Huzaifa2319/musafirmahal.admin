@@ -21,12 +21,12 @@ function App() {
         SignOut({ login, setLogin });
       }
     }
-    setLogin(localStorage.getItem("adtoken") ? true : false);
-    const timeout = setTimeout(() => {
-      SignOut({ login, setLogin });
-    }, 2 * 60 * 1000); // 2 minutes
-    return () => clearTimeout(timeout);
-    // console.log("logged in  ", login, localStorage.getItem("adtoken"));
+    // setLogin(localStorage.getItem("adtoken") ? true : false);
+    // const timeout = setTimeout(() => {
+    //   SignOut({ login, setLogin });
+    // }, 2 * 60 * 1000); // 2 minutes
+    // return () => clearTimeout(timeout);
+    // // console.log("logged in  ", login, localStorage.getItem("adtoken"));
   }, []);
 
   return (
