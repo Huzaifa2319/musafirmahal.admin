@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import "../style/Feedback.css";
 import axios from "axios";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 const Feedback = () => {
   const [feed, setFeed] = useState([]);
-
+  const navigate = useNavigate();
   function getTrips() {
     let token = localStorage.getItem("adtoken");
     axios({
@@ -20,6 +21,8 @@ const Feedback = () => {
       })
       .catch((error) => {
         console.log(error);
+        localStorage.removeItem("adtoken");
+        navigate("/login");
       });
   }
 
@@ -42,6 +45,8 @@ const Feedback = () => {
       })
       .catch((error) => {
         console.log(error);
+        localStorage.removeItem("adtoken");
+        navigate("/login");
       });
 
     getTrips();

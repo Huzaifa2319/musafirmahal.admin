@@ -7,6 +7,7 @@ import Home from "./Admin/Home";
 import Feedback from "./Admin/Feedback";
 import { useEffect, useState } from "react";
 import ProtectedRoute from "./ProtectedRoutes";
+import { SignOut } from "./SignOut";
 function App() {
   const [login, setLogin] = useState(
     localStorage.getItem("adtoken") ? true : false
@@ -17,14 +18,12 @@ function App() {
       const tokenData = JSON.parse(atob(token.split(".")[1]));
       const expirationTime = tokenData.exp * 1000; // Expiration time in milliseconds
       if (Date.now() > expirationTime) {
-        localStorage.removeItem("adtoken");
+        SignOut({ login, setLogin });
       }
     }
     setLogin(localStorage.getItem("adtoken") ? true : false);
     const timeout = setTimeout(() => {
-      // Clear localStorage after timeout
-      localStorage.removeItem("adtoken");
-      setLogin(false);
+      SignOut({ login, setLogin });
     }, 2 * 60 * 1000); // 2 minutes
     return () => clearTimeout(timeout);
     // console.log("logged in  ", login, localStorage.getItem("adtoken"));

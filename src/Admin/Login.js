@@ -10,6 +10,9 @@ const Form = ({ isLogin, setLogin }) => {
   // console.log(isLogin, "HOOOOOO");
 
   useEffect(() => {
+    if (!localStorage.getItem("adtoken")) {
+      setLogin(false);
+    }
     if (isLogin) {
       console.log("login ha user");
       navigate("/");

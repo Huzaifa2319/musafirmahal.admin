@@ -2,10 +2,11 @@ import React, { useEffect } from "react";
 import axios from "axios";
 import { useState } from "react";
 import "../style/Style.css";
+import { useNavigate } from "react-router-dom";
 
 const ManageTrips = () => {
   const [trips, setTrips] = useState([{}]);
-
+  const navigate = useNavigate();
   function fetchT() {
     let token = localStorage.getItem("adtoken");
     const options = {
@@ -22,6 +23,8 @@ const ManageTrips = () => {
       })
       .catch((err) => {
         console.log(err);
+        localStorage.removeItem("adtoken");
+        navigate("/login");
       });
   }
 
@@ -30,9 +33,9 @@ const ManageTrips = () => {
   }, []);
 
   function Show(obj) {
-    {
-      console.log("------", obj);
-    }
+    // {
+    //   console.log("------", obj);
+    // }
     return (
       <Row
         tripid={obj._id}
@@ -82,6 +85,7 @@ const ManageTrips = () => {
 };
 
 const Row = (props) => {
+  const navigate = useNavigate();
   const delHandel = () => {
     let token = localStorage.getItem("adtoken");
     alert(props.tripid);
@@ -100,6 +104,8 @@ const Row = (props) => {
       })
       .catch((err) => {
         console.log(err);
+        localStorage.removeItem("adtoken");
+        navigate("/login");
       });
   };
 
@@ -121,6 +127,8 @@ const Row = (props) => {
       })
       .catch((err) => {
         console.log(err);
+        localStorage.removeItem("adtoken");
+        navigate("/login");
       });
   };
 

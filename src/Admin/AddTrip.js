@@ -2,10 +2,11 @@ import React from "react";
 import { useState } from "react";
 import axios from "axios";
 import "../style/addTrip.css";
+import { useNavigate } from "react-router-dom";
 
 const AddTrip = () => {
   const [trip, setTrip] = useState({});
-
+  const navigate = useNavigate();
   const handle = (e) => {
     const { name, value } = e.target;
     setTrip({ ...trip, [name]: value });
@@ -44,6 +45,8 @@ const AddTrip = () => {
       })
       .catch((err) => {
         console.log(err);
+        localStorage.removeItem("adtoken");
+        navigate("/login");
       });
   };
   return (
