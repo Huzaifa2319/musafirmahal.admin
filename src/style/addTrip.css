@@ -1,0 +1,39 @@
+/* ------------------------------------------------------------------ */
+.s-box {
+  /* height: fit-content; */
+  background-color: white;
+  box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  width: 5in;
+  padding: 0.3in;
+  margin: auto;
+  margin-top: 1in;
+  margin-bottom: 1in;
+}
+
+.s-box h2 {
+  color: black;
+  text-align: center;
+}
+
+.s-box .sindiv .inp {
+  width: 100%;
+  padding: 10px 0;
+  /* font-size: 16px; */
+  color: rgb(24, 0, 0);
+  margin-bottom: 10px;
+  border: none;
+  border-bottom: 1px solid black;
+  outline: none;
+  background: transparent;
+}
+.imgInp {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.desArea {
+  margin: 5px;
+  width: 100%;
+  height: 1in;
+}

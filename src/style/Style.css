@@ -1,0 +1,44 @@
+.box table thead,
+.box table tbody tr td,
+.mtrip {
+  text-align: center;
+  vertical-align: middle;
+}
+/* .mtrip {
+  height: 80vh;
+  overflow: scroll;
+} */
+.trows td img {
+  border-radius: 10px;
+  height: 0.7in;
+  width: 0.7in;
+}
+
+/* ------------------------------------------------------- */
+.butt {
+  background-color: #9b958a;
+  color: white;
+  font-size: 16px;
+  text-transform: uppercase;
+  transition: 0.5s;
+  margin: auto;
+  margin-top: 0.4in;
+  letter-spacing: 4px;
+  display: block;
+  border: none;
+  padding: 6px;
+  width: 100%;
+}
+
+.butt:focus {
+  outline: none;
+}
+
+.butt:hover {
+  transition: 0.5s;
+  background: white;
+  color: #9b958a;
+  border-radius: 5px;
+  box-shadow: 0 0 5px #9b958a, 0 0 5px #9b958a, 0 0 5px #9b958a, 0 0 5px #9b958a;
+  /* box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3); */
+}
