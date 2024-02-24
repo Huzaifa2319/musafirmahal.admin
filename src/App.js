@@ -12,6 +12,8 @@ function App() {
   const [login, setLogin] = useState(
     localStorage.getItem("adtoken") ? true : false
   );
+  setLogin(localStorage.getItem("adtoken") ? true : false);
+
   useEffect(() => {
     const token = localStorage.getItem("adtoken");
     if (token) {
@@ -21,7 +23,7 @@ function App() {
         SignOut({ login, setLogin });
       }
     }
-    // setLogin(localStorage.getItem("adtoken") ? true : false);
+    setLogin(localStorage.getItem("adtoken") ? true : false);
     // const timeout = setTimeout(() => {
     //   SignOut({ login, setLogin });
     // }, 2 * 60 * 1000); // 2 minutes
