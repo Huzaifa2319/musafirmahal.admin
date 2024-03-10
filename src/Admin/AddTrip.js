@@ -104,7 +104,27 @@ const AddTrip = () => {
             name="contact"
             onChange={handle}
           />
-
+          {/* minticketsfordiscount */}
+          <input
+            type="number"
+            className="inp"
+            value={trip.discount || ""}
+            name="discount"
+            placeholder="Discount Percentage"
+            min="0"
+            max="100"
+            onChange={handle}
+          />
+          <input
+            type="number"
+            className="inp"
+            value={trip.minticketsfordiscount || ""}
+            name="minticketsfordiscount"
+            placeholder="Minimum Ticket Quantity for Discount"
+            min="0"
+            max="100"
+            onChange={handle}
+          />
           <br />
           <br />
           <label htmlFor="datePicker">Select a Date : </label>

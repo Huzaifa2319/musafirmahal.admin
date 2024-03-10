@@ -56,7 +56,7 @@ const Header = ({ isLogin, setLogin }) => {
           </div>
         </nav>
       ) : (
-        <h6>.</h6>
+        <></>
       )}
     </>
   );
