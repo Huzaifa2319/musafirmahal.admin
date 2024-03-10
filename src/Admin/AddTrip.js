@@ -45,8 +45,8 @@ const AddTrip = () => {
       })
       .catch((err) => {
         console.log(err);
-        localStorage.removeItem("adtoken");
-        navigate("/login");
+        // localStorage.removeItem("adtoken");
+        // navigate("/login");
       });
   };
   return (
