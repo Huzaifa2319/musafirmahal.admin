@@ -3,7 +3,7 @@ import axios from "axios";
 import { useState } from "react";
 import "../style/Style.css";
 import { useNavigate } from "react-router-dom";
-
+import Swal from "sweetalert2";
 const ManageTrips = () => {
   const [trips, setTrips] = useState([{}]);
   const navigate = useNavigate();
@@ -88,7 +88,7 @@ const Row = (props) => {
   const navigate = useNavigate();
   const delHandel = () => {
     let token = localStorage.getItem("adtoken");
-    alert(props.tripid);
+    // alert(props.tripid);
     const request = {
       url: `https://musafirmahalbackend.vercel.app/deleteTrip/${props.tripid}`,
       method: "DELETE",
@@ -100,6 +100,12 @@ const Row = (props) => {
     axios(request)
       .then((response) => {
         console.log(response);
+        Swal.fire({
+          icon: "success",
+          title: "Trip has been deleted Successfully",
+          showConfirmButton: false,
+          timer: 1200,
+        });
         props.fetchT();
       })
       .catch((err) => {
@@ -123,6 +129,13 @@ const Row = (props) => {
     axios(request)
       .then((response) => {
         console.log(response);
+        Swal.fire({
+          position: "top-end",
+          // icon: "success",
+          title: "Trip Status Updated",
+          showConfirmButton: false,
+          timer: 700,
+        });
         props.fetchT();
       })
       .catch((err) => {

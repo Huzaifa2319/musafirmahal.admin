@@ -3,7 +3,7 @@ import { useState } from "react";
 import axios from "axios";
 import "../style/addTrip.css";
 import { useNavigate } from "react-router-dom";
-
+import Swal from "sweetalert2";
 const AddTrip = () => {
   const [trip, setTrip] = useState({});
   const navigate = useNavigate();
@@ -27,27 +27,56 @@ const AddTrip = () => {
   const SubmitHandler = () => {
     console.log(trip);
     // setTrip({});
-
-    let token = localStorage.getItem("adtoken");
-    const options = {
-      url: "https://musafirmahalbackend.vercel.app/addTrip",
-      method: "POST",
-      data: trip,
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    };
-    console.log(options);
-    axios(options)
-      .then((response) => {
-        console.log(response.data);
-        alert(`Your Trip has been added successfully`);
-      })
-      .catch((err) => {
-        console.log(err);
-        // localStorage.removeItem("adtoken");
-        // navigate("/login");
+    if (
+      trip.contact == "" ||
+      trip.date == "" ||
+      trip.depLocation == "" ||
+      trip.depTime == "" ||
+      trip.description == "" ||
+      trip.discount == "" ||
+      trip.duration == "" ||
+      trip.estTime == "" ||
+      trip.img == "" ||
+      trip.minticketsfordiscount == "" ||
+      trip.name == "" ||
+      trip.price == ""
+    ) {
+      Swal.fire({
+        icon: "warning",
+        title: "Oops...(Blank Fields)",
+        confirmButtonColor: "#9b958a",
+        text: "Please fill all the  fields!",
       });
+    } else {
+      let token = localStorage.getItem("adtoken");
+      const options = {
+        url: "https://musafirmahalbackend.vercel.app/addTrip",
+        method: "POST",
+        data: trip,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      console.log(options);
+      axios(options)
+        .then((response) => {
+          console.log(response.data);
+          Swal.fire({
+            title: "Trip Added Successfully!",
+            text: "You can add More Trips :)",
+            icon: "success",
+          });
+
+          setTrip({});
+          setimg("");
+          // alert(`Your Trip has been added successfully`);
+        })
+        .catch((err) => {
+          console.log(err);
+          localStorage.removeItem("adtoken");
+          navigate("/login");
+        });
+    }
   };
   return (
     <>

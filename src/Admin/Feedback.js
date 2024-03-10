@@ -3,6 +3,7 @@ import "../style/Feedback.css";
 import axios from "axios";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 const Feedback = () => {
   const [feed, setFeed] = useState([]);
   const navigate = useNavigate();
@@ -31,25 +32,42 @@ const Feedback = () => {
   }, []);
 
   const clearHandle = () => {
-    let token = localStorage.getItem("adtoken");
-    axios({
-      method: "DELETE",
-      url: "https://musafirmahalbackend.vercel.app/clearFeedback",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((response) => {
-        console.log(response.data);
-        getTrips();
-      })
-      .catch((error) => {
-        console.log(error);
-        localStorage.removeItem("adtoken");
-        navigate("/login");
-      });
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        let token = localStorage.getItem("adtoken");
+        axios({
+          method: "DELETE",
+          url: "https://musafirmahalbackend.vercel.app/clearFeedback",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+          .then((response) => {
+            console.log(response.data);
+            Swal.fire({
+              title: "Deleted!",
+              text: "All feedbacks have been deleted!",
+              icon: "success",
+            });
+            getTrips();
+          })
+          .catch((error) => {
+            console.log(error);
+            localStorage.removeItem("adtoken");
+            navigate("/login");
+          });
 
-    getTrips();
+        getTrips();
+      }
+    });
   };
 
   return (
@@ -61,7 +79,16 @@ const Feedback = () => {
         <button
           className="btn btn-primary"
           style={{ marginLeft: "5px" }}
-          onClick={getTrips}
+          onClick={() => {
+            getTrips();
+            Swal.fire({
+              position: "top-end",
+              // icon: "success",
+              title: "Feedback refreshed",
+              showConfirmButton: false,
+              timer: 700,
+            });
+          }}
         >
           Refresh
         </button>
