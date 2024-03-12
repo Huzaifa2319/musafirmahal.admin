@@ -13,7 +13,7 @@ const ExportBookings = () => {
   function fetchT() {
     let token = localStorage.getItem("adtoken");
     const options = {
-      url: `https://musafirmahalbackend.vercel.app/${id}`,
+      url: `https://musafirmahalbackend.vercel.app/tripBooked/${id}`,
       method: "GET",
       headers: {
         Authorization: `Bearer ${token}`,
