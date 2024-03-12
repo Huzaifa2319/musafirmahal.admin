@@ -3,9 +3,10 @@ import axios from "axios";
 import { useState } from "react";
 import "../style/Style.css";
 import { useNavigate } from "react-router-dom";
-import Swal from "sweetalert2";
+// import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 import Logout from "../Logout";
-const ManageTrips = () => {
+const ManageBookings = () => {
   const [trips, setTrips] = useState([{}]);
   const navigate = useNavigate();
   function fetchT() {
@@ -59,7 +60,7 @@ const ManageTrips = () => {
   return (
     <>
       <div className="mtrip">
-        <h1>Manage Trips</h1>
+        <h1>Manage Bookings</h1>
         <div className="box">
           <table className="table table-striped table-hover">
             <thead>
@@ -74,8 +75,7 @@ const ManageTrips = () => {
               <th>Duration</th>
               <th>Contact</th>
               <th>Expire</th>
-              <th>T/F Action</th>
-              <th>Delete</th>
+              <th>Bookings</th>
             </thead>
 
             <tbody>{trips.map(Show)}</tbody>
@@ -88,67 +88,7 @@ const ManageTrips = () => {
 
 const Row = (props) => {
   const navigate = useNavigate();
-  const delHandel = () => {
-    let token = localStorage.getItem("adtoken");
-    // alert(props.tripid);
-    const request = {
-      url: `https://musafirmahalbackend.vercel.app/deleteTrip/${props.tripid}`,
-      method: "DELETE",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    };
-
-    axios(request)
-      .then((response) => {
-        console.log(response);
-        Swal.fire({
-          icon: "success",
-          title: "Trip has been deleted Successfully",
-          showConfirmButton: false,
-          timer: 1200,
-        });
-        props.fetchT();
-      })
-      .catch((err) => {
-        Logout();
-        console.log(err);
-        localStorage.removeItem("adtoken");
-        navigate("/login");
-      });
-  };
-
-  const expireHandel = () => {
-    let token = localStorage.getItem("adtoken");
-    const request = {
-      url: `https://musafirmahalbackend.vercel.app/updateTrips/${props.tripid}`,
-      method: "PUT",
-      data: { isExpire: props.isExpire },
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    };
-
-    axios(request)
-      .then((response) => {
-        console.log(response);
-        Swal.fire({
-          position: "top-end",
-          // icon: "success",
-          title: "Trip Status Updated",
-          showConfirmButton: false,
-          timer: 700,
-        });
-        props.fetchT();
-      })
-      .catch((err) => {
-        Logout();
-        console.log(err);
-        localStorage.removeItem("adtoken");
-        navigate("/login");
-      });
-  };
-
+  // console.log(props.tripid);
   return (
     <>
       <tr className="trows">
@@ -166,16 +106,15 @@ const Row = (props) => {
         <td>{props.contact}</td>
         <td>{props.isExpire + "."}</td>
         {/* <td>{props.description}</td> */}
-        <td>
-          <button className="btn btn-warning" onClick={expireHandel}>
-            Open
-          </button>
-        </td>
+
         <td>
           <div style={{}}>
-            <button className="btn btn-danger" onClick={delHandel}>
-              Delete
-            </button>
+            <Link
+              to={`/bookingdetails/${props.tripid}`}
+              className="btn btn-primary"
+            >
+              Bookings
+            </Link>
           </div>
         </td>
       </tr>
@@ -183,4 +122,4 @@ const Row = (props) => {
   );
 };
 
-export default ManageTrips;
+export default ManageBookings;

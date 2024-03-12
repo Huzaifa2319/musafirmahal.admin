@@ -4,6 +4,7 @@ import axios from "axios";
 import "../style/addTrip.css";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import Logout from "../Logout";
 const AddTrip = () => {
   const [trip, setTrip] = useState({});
   const navigate = useNavigate();
@@ -72,6 +73,7 @@ const AddTrip = () => {
           // alert(`Your Trip has been added successfully`);
         })
         .catch((err) => {
+          Logout();
           console.log(err);
           localStorage.removeItem("adtoken");
           navigate("/login");

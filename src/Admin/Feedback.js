@@ -4,6 +4,7 @@ import axios from "axios";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import Logout from "../Logout";
 const Feedback = () => {
   const [feed, setFeed] = useState([]);
   const navigate = useNavigate();
@@ -22,6 +23,7 @@ const Feedback = () => {
       })
       .catch((error) => {
         console.log(error);
+        Logout();
         localStorage.removeItem("adtoken");
         navigate("/login");
       });
@@ -61,6 +63,7 @@ const Feedback = () => {
           })
           .catch((error) => {
             console.log(error);
+            Logout();
             localStorage.removeItem("adtoken");
             navigate("/login");
           });
@@ -98,7 +101,7 @@ const Feedback = () => {
           <table className="table table-striped">
             <thead>
               <tr>
-                <th>Name</th>
+                <th>Email</th>
                 <th>Title</th>
                 <th>Date</th>
                 <th>Feedback</th>
@@ -109,7 +112,7 @@ const Feedback = () => {
                 return (
                   <>
                     <tr>
-                      <td>Anonymous</td>
+                      <td>{e.name}</td>
 
                       <td>{e.title}</td>
                       <td>{e.createdAt.split("T")[0]}</td>

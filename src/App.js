@@ -8,6 +8,8 @@ import Feedback from "./Admin/Feedback";
 import { useEffect, useState } from "react";
 import ProtectedRoute from "./ProtectedRoutes";
 import { SignOut } from "./SignOut";
+import ManageBookings from "./Admin/ManageBookings";
+import ExportBookings from "./Admin/ExportBookings";
 function App() {
   const [login, setLogin] = useState(
     localStorage.getItem("adtoken") ? true : false
@@ -87,6 +89,22 @@ function App() {
           element={
             <ProtectedRoute user={login}>
               <AddTrip />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/bookings"
+          element={
+            <ProtectedRoute user={login}>
+              <ManageBookings />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/bookingdetails/:id"
+          element={
+            <ProtectedRoute user={login}>
+              <ExportBookings />
             </ProtectedRoute>
           }
         />
