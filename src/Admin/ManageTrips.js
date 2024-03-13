@@ -109,6 +109,20 @@ const Row = (props) => {
           timer: 1200,
         });
         props.fetchT();
+
+        // ------------------
+        axios({
+          url: `https://musafirmahalbackend.vercel.app/deleteAllBookings/${props.tripid}`,
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+          .then((res) => {
+            console.log("reffered bookings deleted");
+          })
+          .catch((err) => {});
+        // -----------------
       })
       .catch((err) => {
         Logout();
