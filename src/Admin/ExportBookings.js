@@ -5,10 +5,12 @@ import Swal from "sweetalert2";
 import Logout from "../Logout";
 import { useNavigate, useParams } from "react-router-dom";
 import "../style/Style.css";
+import { CSVLink } from "react-csv";
 
 const ExportBookings = () => {
   const { id } = useParams();
   const [book, setBook] = useState([]);
+  const [trip, setTrip] = useState({});
   const navigate = useNavigate();
   function fetchT() {
     let token = localStorage.getItem("adtoken");
@@ -33,26 +35,48 @@ const ExportBookings = () => {
   }
 
   useEffect(() => {
+    const token = localStorage.getItem("adtoken");
     fetchT();
+    axios({
+      url: `https://musafirmahalbackend.vercel.app/searchTrip/${id}`,
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((response) => {
+        setTrip(response.data);
+      })
+      .catch((err) => {
+        Logout();
+        localStorage.removeItem("adtoken");
+        navigate("/login");
+      });
   }, []);
 
   function Show(obj) {
     return <Row data={obj} fetchT={fetchT} />;
   }
 
+  const headers = [
+    // { label: "First Name", key: "firstname" },
+    // { label: "Last Name", key: "lastname" },
+    // { label: "Email", key: "email" },
+  ];
+
   return (
     <>
       <div className="bookingPage" style={{ minHeight: "100vh" }}>
         <div className="mtrip">
           <div className="clrbtn">
-            <button
+            <CSVLink
               className="btn btn-primary"
-              onClick={() => {
-                alert("File Exported");
-              }}
+              data={book}
+              filename={trip.name + " " + trip.date}
             >
-              Export
-            </button>
+              Export as .csv
+            </CSVLink>
+
             <button
               className="btn btn-success"
               style={{ marginLeft: "5px" }}
@@ -85,7 +109,6 @@ const ExportBookings = () => {
               Confirm All
             </button>
           </div>
-
           <h1>My Bookings</h1>
           <div className="box">
             <table className="table table-striped table-hover">
@@ -110,6 +133,7 @@ const ExportBookings = () => {
               <tbody>{book.map(Show)}</tbody>
             </table>
           </div>
+          {/* <CSVLink data={book}>Download me</CSVLink>; */}
         </div>
       </div>
     </>
