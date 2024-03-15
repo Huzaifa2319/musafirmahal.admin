@@ -98,31 +98,33 @@ const Feedback = () => {
       </div>
       <div>
         <div className="data">
-          <table className="table table-striped">
-            <thead>
-              <tr>
-                <th>Email</th>
-                <th>Title</th>
-                <th>Date</th>
-                <th>Feedback</th>
-              </tr>
-            </thead>
-            <tbody>
-              {feed.map((e) => {
-                return (
-                  <>
-                    <tr>
-                      <td>{e.name}</td>
+          <div class="table-responsive">
+            <table className="table table-striped">
+              <thead>
+                <tr>
+                  <th>Email</th>
+                  <th>Title</th>
+                  <th>Date</th>
+                  <th>Feedback</th>
+                </tr>
+              </thead>
+              <tbody>
+                {feed.map((e) => {
+                  return (
+                    <>
+                      <tr>
+                        <td>{e.name}</td>
 
-                      <td>{e.title}</td>
-                      <td>{e.createdAt.split("T")[0]}</td>
-                      <td>{e.feedback}</td>
-                    </tr>
-                  </>
-                );
-              })}
-            </tbody>
-          </table>
+                        <td>{e.title}</td>
+                        <td>{e.createdAt.split("T")[0]}</td>
+                        <td>{e.feedback}</td>
+                      </tr>
+                    </>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
           {feed.length === 0 && (
             <h3 style={{ color: "red", textAlign: "center" }}>
               No feedback is given yet

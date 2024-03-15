@@ -62,24 +62,26 @@ const ManageBookings = () => {
       <div className="mtrip">
         <h1>Manage Bookings</h1>
         <div className="box">
-          <table className="table table-striped table-hover">
-            <thead>
-              <th>Trip id</th>
-              <th>Image</th>
-              <th>Name</th>
-              <th>Price</th>
-              <th>Location</th>
-              <th>Time</th>
-              <th>Est-Time</th>
-              <th>Date</th>
-              <th>Duration</th>
-              <th>Contact</th>
-              <th>Expire</th>
-              <th>Bookings</th>
-            </thead>
+          <div class="table-responsive">
+            <table className="table table-striped table-hover">
+              <thead>
+                <th>Trip id</th>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Location</th>
+                <th>Time</th>
+                <th>Est-Time</th>
+                <th>Date</th>
+                <th>Duration</th>
+                <th>Contact</th>
+                <th>Expire</th>
+                <th>Bookings</th>
+              </thead>
 
-            <tbody>{trips.map(Show)}</tbody>
-          </table>
+              <tbody>{trips.map(Show)}</tbody>
+            </table>
+          </div>
         </div>
       </div>
     </>

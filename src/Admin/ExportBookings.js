@@ -109,29 +109,31 @@ const ExportBookings = () => {
               Confirm All
             </button>
           </div>
-          <h1>My Bookings</h1>
+          <h1>Booking Detail</h1>
           <div className="box">
-            <table className="table table-striped table-hover">
-              <thead>
-                <th>Image</th>
-                <th>Trip Name</th>
-                {/*  */}
-                <th>Customer Name</th>
-                <th>CNIC</th>
-                <th>Phone Number</th>
-                <th>Email</th>
-                {/*  */}
-                <th>No of Seats</th>
-                <th>Total</th>
-                <th>Discount</th>
-                <th>Grand Total</th>
-                <th>Status</th>
-                <th>Confirm Action</th>
-                <th>Cancel Action</th>
-              </thead>
+            <div class="table-responsive">
+              <table className="table table-striped table-hover">
+                <thead>
+                  <th>Image</th>
+                  <th>Trip Name</th>
+                  {/*  */}
+                  <th>Customer Name</th>
+                  <th>CNIC</th>
+                  <th>Phone Number</th>
+                  <th>Email</th>
+                  {/*  */}
+                  <th>No of Seats</th>
+                  <th>Total</th>
+                  <th>Discount</th>
+                  <th>Grand Total</th>
+                  <th>Status</th>
+                  <th>Confirm Action</th>
+                  <th>Cancel Action</th>
+                </thead>
 
-              <tbody>{book.map(Show)}</tbody>
-            </table>
+                <tbody>{book.map(Show)}</tbody>
+              </table>
+            </div>
           </div>
           {/* <CSVLink data={book}>Download me</CSVLink>; */}
         </div>
