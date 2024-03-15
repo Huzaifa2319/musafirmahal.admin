@@ -36,7 +36,6 @@ const AddTrip = () => {
       trip.description == "" ||
       trip.discount == "" ||
       trip.duration == "" ||
-      trip.estTime == "" ||
       trip.img == "" ||
       trip.minticketsfordiscount == "" ||
       trip.name == "" ||
@@ -114,16 +113,8 @@ const AddTrip = () => {
           <input
             type="text"
             className="inp"
-            value={trip.estTime || ""}
-            placeholder="Enter Estimated Time "
-            name="estTime"
-            onChange={handle}
-          />
-          <input
-            type="number"
-            className="inp"
             value={trip.duration || ""}
-            placeholder="Enter Duration (days)"
+            placeholder="Enter Duration (write whatever you want)"
             name="duration"
             onChange={handle}
           />
