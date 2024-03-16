@@ -55,14 +55,8 @@ const ExportBookings = () => {
   }, []);
 
   function Show(obj) {
-    return <Row data={obj} fetchT={fetchT} />;
+    return <Row data={obj} fetchT={fetchT} trip={trip} />;
   }
-
-  const headers = [
-    // { label: "First Name", key: "firstname" },
-    // { label: "Last Name", key: "lastname" },
-    // { label: "Email", key: "email" },
-  ];
 
   return (
     <>
@@ -127,6 +121,7 @@ const ExportBookings = () => {
                   <th>Discount</th>
                   <th>Grand Total</th>
                   <th>Status</th>
+                  <th>Send Confirmation Email</th>
                   <th>Confirm Action</th>
                   <th>Cancel Action</th>
                 </thead>
@@ -135,7 +130,6 @@ const ExportBookings = () => {
               </table>
             </div>
           </div>
-          {/* <CSVLink data={book}>Download me</CSVLink>; */}
         </div>
       </div>
     </>
@@ -145,35 +139,14 @@ const ExportBookings = () => {
 const Row = (props) => {
   const navigate = useNavigate();
   console.log("props are == ", props);
-  const [trip, setTrip] = useState({});
-  useEffect(() => {
-    const token = localStorage.getItem("adtoken");
-    axios({
-      url: `https://musafirmahalbackend.vercel.app/searchTrip/${props.data.tripId}`,
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((response) => {
-        console.log("-->", response.data);
-        setTrip(response.data);
-      })
-      .catch((err) => {
-        Logout();
-        localStorage.removeItem("adtoken");
-        navigate("/login");
-        console.log(err);
-      });
-  }, []);
 
   return (
     <>
       <tr className="trows" style={{}}>
         <td>
-          <img src={trip.img} alt="loading" />
+          <img src={props.trip.img} alt="loading" />
         </td>
-        <td>{trip.name}</td>
+        <td>{props.trip.name}</td>
         <td>{props.data.name}</td>
         <td>{props.data.cnic}</td>
         <td>{props.data.phone}</td>
@@ -183,7 +156,42 @@ const Row = (props) => {
         <td>{props.data.discount}</td>
         <td>{props.data.grandTotal}</td>
         <td>{props.data.status}</td>
-
+        <td>
+          <button
+            className="btn btn-warning"
+            onClick={() => {
+              if (props.data.status === "confirmed") {
+                axios({
+                  url: "https://musafirmahalbackend.vercel.app/sendemail",
+                  method: "POST",
+                  data: {
+                    trip: props.trip,
+                    book: props.data,
+                  },
+                })
+                  .then((response) => {
+                    console.log(response.data);
+                    Swal.fire({
+                      icon: "success",
+                      title: "Email Sent",
+                      text: "Confirmation Email has been sent to the Customer",
+                    });
+                  })
+                  .catch((error) => {
+                    console.log(error);
+                  });
+              } else {
+                Swal.fire({
+                  icon: "error",
+                  title: "Oops...",
+                  text: "Please Confirm the  Booking First! to send Confirmation Email",
+                });
+              }
+            }}
+          >
+            Send Email
+          </button>
+        </td>
         <td>
           <div style={{}}>
             <button
