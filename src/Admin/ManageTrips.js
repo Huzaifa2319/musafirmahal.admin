@@ -70,7 +70,6 @@ const ManageTrips = () => {
                 <th>Price</th>
                 <th>Location</th>
                 <th>Time</th>
-                <th>Est-Time</th>
                 <th>Date</th>
                 <th>Duration</th>
                 <th>Contact</th>
@@ -176,7 +175,6 @@ const Row = (props) => {
         <td>{props.price}</td>
         <td>{props.depLocation}</td>
         <td>{props.depTime}</td>
-        <td>{props.estTime}</td>
         <td>{props.date}</td>
         <td>{props.duration}</td>
         <td>{props.contact}</td>

@@ -94,11 +94,11 @@ const AddTrip = () => {
           />
 
           <input
-            type="number"
+            type="text"
             className="inp"
             value={trip.price || ""}
-            name="price"
             placeholder="Enter Price"
+            name="price"
             onChange={handle}
           />
           <input
